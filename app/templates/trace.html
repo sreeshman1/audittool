@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block body %}
+  <h2>Trace</h2>
+  <form action="{{ url_for('trace') }}" method=post>
+    <dl>
+      <dt>Request:
+      <dd><input type=text name=request>
+      <dd><input type=submit value=Trace>
+    </dl>
+  </form>
+  {% if jaeger %}
+  <label for="request-box">Response:</label>
+		<a href="http://jaeger.internal:16686/search?service=kiip_service&tag=jaeger-debug-id%3A{{jaeger}}"</a><pre>{{response}}</pre>
+  {% endif %}
+{% endblock %}
